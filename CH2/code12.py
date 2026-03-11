@@ -18,3 +18,18 @@ class MainWindow(QMainWindow):
         
         self.input = QLineEdit()
         self.input.textChanged.connect(self.label.setText)
+        
+        layout = QVBoxLayout()
+        layout.addWidget(self.input)
+        layout.addWidget(self.label)
+        
+        container = QWidget()
+        container.setLayout(layout)
+        self.setCentralWidget(container)
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()

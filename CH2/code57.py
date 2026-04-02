@@ -71,12 +71,44 @@ class MainWindow(QMainWindow):
         
     def get_a_str_from_a_list(self):
         title = "Select a string"
+        label = "Select a fruit from the list"
+        items = ["apple", "pear", "orange", "grape"]
+        initail_selection = 2
+        my_selected_str, ok = QInputDialog.getItem(
+            self,
+            title,
+            label,
+            items,
+            current = initail_selection,
+            editable = False
+        )
+        print(f"Resutl : {ok}, {my_selected_str}")
     
     def get_a_str(self):
-        pass
-    def get_text(self):
-        pass
+        title = "Enter a string"
+        label = "Type your password"
+        text = "my password"
+        mode = QLineEdit.EchoMode.Password
+        my_str, ok = QInputDialog.getText(
+            self,
+            title,
+            label,
+            mode,
+            text
+        )
+        print(f"Resutl : {ok}, {my_str}")
         
+    def get_text(self):
+        title = "Enter text"
+        label = "type here"
+        text = "Once upon a time.."
+        my_str, ok = QInputDialog.getMultiLineText(
+            self,
+            title,
+            label,
+            text
+        )
+        print(f"Resutl : {ok}, {my_str}")    
         
 app = QApplication(sys.argv)
 

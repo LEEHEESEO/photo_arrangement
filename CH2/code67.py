@@ -60,8 +60,7 @@ class MainWindow(QMainWindow):
         print(f"Result: {filename}, {selected_filter}")
         
         if filename:
-            with open(filename, "r") as f:
-                file_contents = f.read()
+            os.startfile(filename)
     
     def get_filenames(self):
         caption = "데이터 파일을 모두 선택하세요"
@@ -112,7 +111,23 @@ class MainWindow(QMainWindow):
                 f.write(file_content)
                 
         
-    def get_folder(self): pass
+    def get_folder(self):
+        caption = "select folder"
+        initial_dir = basedir
+        initial_filter = FILE_FILTERS[1]
+        
+        dialog = QFileDialog()
+        dialog.setWindowTitle(caption)
+        dialog.setDirectory(initial_dir)
+        dialog.setNameFilters(FILE_FILTERS)
+        dialog.selectNameFilter(initial_filter)
+        dialog.setFileMode(QFileDialog.FileMode.Directory)
+        
+        ok = dialog.exec()
+        print(
+            "Result", ok, dialog.selectedFiles(), dialog.selectedNameFilter()
+        )
+        
     
 
 app = QApplication(sys.argv)
@@ -126,5 +141,5 @@ app.exec()
 #if filename:
 #            with open(filename, "r") as f:
 #                file_contents = f.read()
- #   해당 부분의 문제점이 뭘까?
+ #   이 코드가 있는데도 get_filename이 호출됐을 때 파일이 열리지 않는 이유는 무엇일까?
 ### 
